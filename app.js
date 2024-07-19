@@ -9,3 +9,14 @@ const phrases = [
 ];
 
 
+
+const overlay = document.querySelector("#overlay");
+
+overlay.addEventListener("click", event => {
+
+    if (event.target.tagName === "A"){
+        overlay.style.display = "none";
+    }
+
+})
+
