@@ -86,6 +86,26 @@ const split_phrase = getRandomPhrasesAsArray(phrases);
 addPhraseToDisplay(split_phrase)
 
 
+qwerty.addEventListener('click', e => {
+
+    console.log(e.target);
+
+    const lives = document.querySelector("#scoreboard > ol");
+
+    if(e.target.tagName === "BUTTON" && !e.target.classList.contains('chosen')){
+
+        e.target.classList.add('chosen')
+
+        const check = checkLetter(e.target.textContent);
+
+        if(!check){
+            lives.removeChild(lives.firstElementChild)
+        }
+
+    }
+
+
+})
 
 
 
