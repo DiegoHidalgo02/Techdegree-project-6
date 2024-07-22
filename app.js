@@ -39,6 +39,23 @@ function getRandomPhrasesAsArray(array){
 }
 
 
+function addPhraseToDisplay(phrase){
+    
+    const list = document.querySelector("#phrase > ul")
+    
+    phrase.forEach(character => {
+        
+        const listItemCharacter = document.createElement('li');
+        
+        listItemCharacter.textContent = character;
+        
+        list.appendChild(listItemCharacter);
+        
+        character !== " " ? listItemCharacter.className = "letter" : listItemCharacter.className = "space";
+    })
+    
+}
+
 
 
 
