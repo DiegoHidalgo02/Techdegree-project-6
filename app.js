@@ -81,6 +81,16 @@ function checkLetter(clickButtonLetter){
 
 
 
+const split_phrase = getRandomPhrasesAsArray(phrases);
+
+addPhraseToDisplay(split_phrase)
+
+
+
+
+
+
+
 
 
 
