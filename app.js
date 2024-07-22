@@ -57,6 +57,31 @@ function addPhraseToDisplay(phrase){
 }
 
 
+function checkLetter(clickButtonLetter){
+
+    let checkLetters = document.querySelectorAll('#phrase > ul > li.letter');
+
+    let matchFound = null;
+
+    checkLetters.forEach(Letter => {
+
+        if (Letter.textContent.toLocaleLowerCase() === clickButtonLetter){
+            Letter.classList.add("show");
+
+            matchFound = true;
+        }
+
+    })
+
+    
+    return matchFound;
+
+}
+
+
+
+
+
 
 
 
