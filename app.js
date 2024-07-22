@@ -8,8 +8,15 @@ const phrases = [
     "Time flies",
 ];
 
+const qwerty = document.getElementById('qwerty');
+
+const phrase = document.getElementById('phrase');
+
+const btn_reset = document.querySelector('btn_reset');
 
 
+
+/*Remove Overlay and start the game*/
 const overlay = document.querySelector("#overlay");
 
 overlay.addEventListener("click", event => {
@@ -19,4 +26,21 @@ overlay.addEventListener("click", event => {
     }
 
 })
+/************************************************************/
+
+
+function getRandomPhrasesAsArray(array){
+
+    const phrase = array[Math.floor(Math.random() * phrases.length)];
+
+    const split_phrase = Array.from(phrase)
+
+    return split_phrase;
+}
+
+
+
+
+
+
 
