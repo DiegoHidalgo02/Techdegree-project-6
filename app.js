@@ -18,6 +18,35 @@ let letterFound;
 
 let missed = 0;
 
+
+
+function startGame(){
+    const split_phrase = getRandomPhrasesAsArray(phrases);
+    addPhraseToDisplay(split_phrase)
+}
+
+function endGame(){
+
+    const list = document.querySelectorAll("#phrase > ul > li");
+
+    list.forEach(Element => {
+        Element.remove();
+    })
+    
+    const qwertyButtons = qwerty.querySelectorAll("button");
+
+    qwertyButtons.forEach(Button => {
+
+        Button.classList.remove('chosen');
+
+        Button.disabled = false;
+
+    })
+
+
+}
+
+
 /*Remove Overlay and start the game*/
 const overlay = document.querySelector("#overlay");
 
