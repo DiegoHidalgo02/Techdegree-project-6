@@ -138,7 +138,23 @@ qwerty.addEventListener('click', e => {
 })
 
 
+const gameButtons =  document.querySelector("#ReMatchButtons");
+let count = 1;
 
+gameButtons.addEventListener("click",
+    clickItem => {
+        if(clickItem.target.tagName === "BUTTON" && clickItem.target.textContent.toLocaleLowerCase() === "new game"){
+            window.location.reload();
+        }else if(clickItem.target.tagName === "BUTTON" && clickItem.target.textContent.toLocaleLowerCase() === "help" && count <= 3){
+            count++;
+            const letters = phrase.querySelectorAll("ul > li.letter");
+
+            let helpLetter = letters[Math.floor(Math.random() * letters.length)];
+
+            helpLetter.classList.add("show");
+        }
+    }
+)
 
 
 
