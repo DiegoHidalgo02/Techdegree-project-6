@@ -1,4 +1,4 @@
-let attempts = 0;
+const attempts = 5;
 
 const phrases = [
     "Carpe diem",
@@ -14,20 +14,22 @@ const phrase = document.getElementById('phrase');
 
 const btn_reset = document.querySelector('btn_reset');
 
+let letterFound;
 
+let missed = 0;
 
 /*Remove Overlay and start the game*/
 const overlay = document.querySelector("#overlay");
 
 overlay.addEventListener("click", event => {
-
+    
     if (event.target.tagName === "A"){
+        startGame();
         overlay.style.display = "none";
     }
-
+    
 })
 /************************************************************/
-
 
 function getRandomPhrasesAsArray(array){
 
@@ -67,7 +69,6 @@ function checkLetter(clickButtonLetter){
 
         if (Letter.textContent.toLocaleLowerCase() === clickButtonLetter){
             Letter.classList.add("show");
-
             matchFound = true;
         }
 
@@ -80,36 +81,61 @@ function checkLetter(clickButtonLetter){
 
 
 
+function checkWin(){
+    
+    let letters = document.querySelectorAll(".letter");
+    
+    let showLetter = document.querySelectorAll(".show");
+    
+    if (letters.length === showLetter.length){
+        
+        overlay.style.display = "flex";
 
-const split_phrase = getRandomPhrasesAsArray(phrases);
+        overlay.classList.add("win");
 
-addPhraseToDisplay(split_phrase)
+        endGame();
 
+    }else if (missed >= attempts){
 
-qwerty.addEventListener('click', e => {
+        overlay.style.display = "flex";
 
-    console.log(e.target);
+        overlay.classList.add("lose");
 
-    const lives = document.querySelector("#scoreboard > ol");
-
-    if(e.target.tagName === "BUTTON" && !e.target.classList.contains('chosen')){
-
-        e.target.classList.add('chosen')
-
-        const check = checkLetter(e.target.textContent);
-
-        if(!check){
-            lives.removeChild(lives.firstElementChild)
-        }
+        endGame();
 
     }
 
+}
 
+
+
+
+
+qwerty.addEventListener('click', e => {
+    
+    console.log(e.target);
+    const lives = document.querySelector("#scoreboard > ol").childNodes;
+    
+    if(e.target.tagName === "BUTTON" && !e.target.classList.contains('chosen')){
+        
+        e.target.classList.add('chosen');
+
+        e.target.disabled = "true";
+
+        const letterFound = checkLetter(e.target.textContent);
+        
+        if(!letterFound){
+
+            lives[missed].firstElementChild.src = "images/lostHeart.png"
+
+            missed = missed + 1;
+        }
+        
+    }
+    
+    checkWin();
+    
 })
-
-
-
-
 
 
 
