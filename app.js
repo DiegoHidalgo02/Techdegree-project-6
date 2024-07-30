@@ -3,7 +3,7 @@ const attempts = 5;
 const phrases = [
     "Carpe diem",
     "Less is more",
-    "Less is more",
+    "Still I rise",
     "Actions speak louder than words",
     "Time flies",
 ];
@@ -12,7 +12,9 @@ const qwerty = document.getElementById('qwerty');
 
 const phrase = document.getElementById('phrase');
 
-const btn_reset = document.querySelector('btn_reset');
+const btn_reset = document.querySelector('.btn__reset');
+
+const lives = document.querySelectorAll("li.tries");
 
 let letterFound;
 
@@ -26,6 +28,8 @@ function startGame(){
 }
 
 function endGame(){
+
+    missed = 0;
 
     const list = document.querySelectorAll("#phrase > ul > li");
 
@@ -41,6 +45,10 @@ function endGame(){
 
         Button.disabled = false;
 
+    })
+
+    lives.forEach(live => {
+        live.firstElementChild.src = "images/liveHeart.png"
     })
 
 
@@ -115,20 +123,30 @@ function checkWin(){
     let letters = document.querySelectorAll(".letter");
     
     let showLetter = document.querySelectorAll(".show");
+
+    const title = document.querySelector("#overlay h2.title")
     
     if (letters.length === showLetter.length){
         
         overlay.style.display = "flex";
 
-        overlay.classList.add("win");
+        title.textContent = "You Won";
 
+        btn_reset.textContent = "Restart Game";
+
+        overlay.className = "win";
+        
         endGame();
-
+        
     }else if (missed >= attempts){
-
+        
         overlay.style.display = "flex";
+        
+        title.textContent = "You Lose";
 
-        overlay.classList.add("lose");
+        btn_reset.textContent = "Try again";
+        
+        overlay.className = "lose";
 
         endGame();
 
@@ -143,7 +161,6 @@ function checkWin(){
 qwerty.addEventListener('click', e => {
     
     console.log(e.target);
-    const lives = document.querySelector("#scoreboard > ol").childNodes;
     
     if(e.target.tagName === "BUTTON" && !e.target.classList.contains('chosen')){
         
