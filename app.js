@@ -30,8 +30,10 @@ function startGame(){
 function endGame(){
 
     missed = 0;
-
+    count = 1;
+    letterArray.length = 0;
     const list = document.querySelectorAll("#phrase > ul > li");
+
 
     list.forEach(Element => {
         Element.remove();
@@ -186,6 +188,8 @@ qwerty.addEventListener('click', e => {
 
 const gameButtons =  document.querySelector("#ReMatchButtons");
 let count = 1;
+let letterArray = [];
+let helpLetter;
 
 gameButtons.addEventListener("click",
     clickItem => {
@@ -193,11 +197,16 @@ gameButtons.addEventListener("click",
             window.location.reload();
         }else if(clickItem.target.tagName === "BUTTON" && clickItem.target.textContent.toLocaleLowerCase() === "help" && count <= 3){
             count++;
-            const letters = phrase.querySelectorAll("ul > li.letter");
+            const letters = phrase.querySelectorAll("ul > li.letter:not(li.show)");
 
-            let helpLetter = letters[Math.floor(Math.random() * letters.length)];
+            do{
+                helpLetter = letters[Math.floor(Math.random() * letters.length)];
+            }while(letterArray.includes(helpLetter))
+
+            letterArray.push(helpLetter);
 
             helpLetter.classList.add("show");
+
         }
     }
 )
